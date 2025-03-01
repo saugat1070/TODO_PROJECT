@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog_page</title>
+</head>
+<body>
+    {{ request.session.useremail }}
+    {{ request.session.username }}
+    <div class="create">
+        <form action="/task/crud/" method="POST">
+            {% csrf_token %}
+            <br><br>
+            Task Name
+            <input type="text" name="task_name" id="">
+            <br><br>
+            Task Description
+            <input type="text" name="task_description" id="">
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="view">
+        {%for each in data%}
+        <hr>
+        <br>
+            {{each.title}}
+            <br>
+            {{each.description}}
+            <br>
+            {{each.created_at}}
+            <br>
+            <br>
+            <form action="/blog_page/update/{{each.id}}/" method="POST">
+                {% csrf_token %}
+                <button type="submit">View more</button>
+            </form>
+            <form action="/blog_page/update/" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="task_id" value = {{each.id}}>
+                <input type="text" name="task_name_updated" placeholder="tassk _name" value="{{each.title}}">
+                <input type="text" name="task_description_updated" placeholder="task description" value="{{each.description}}">
+                <button type="submit"> Update </button>
+            </form>
+            <form action="/blog_page/delete/{{each.id}}/" method="POST">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        {%endfor%}
+    </div>
+</body>
+</html>

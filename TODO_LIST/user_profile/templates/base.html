@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'login_page' %}">Login</a>
+        <a href="{% url 'register' %}">Sign Up</a>
+        
+    </nav>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
